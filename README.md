@@ -8,7 +8,7 @@ tortoise_gen.py
 ## Picture Generation
 Each generated short includes a few AI generated pictures. For picture generation I am using:
 ```
-stable-diffusion-v1-5
+stabilityai/stable-diffusion-2-1
 ```
 model. The code is available in:
 ```
@@ -22,11 +22,7 @@ vids/
 directory. 
 
 ## Text Generation
-I am trying to use RAG with an LLM but the code is not yet ready. For now there is 
-```
-story_inputs.py
-```
-where you can write your stories and prompts for images. <br>
+<br>
 
 ## Automation
 This code is not yet fully automated because the text generation is not yet ready. But I will add the codes to repo in the near future.
