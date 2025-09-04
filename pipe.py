@@ -17,12 +17,13 @@ import time
 from pathlib import Path
 import subprocess
 from typing import List, Tuple
+import ast  # <-- Add this import
 
 # =========================
 # CONFIG — change as needed
 # =========================
 # Which generator script to call (must save files into OUTPUT_DIR)
-GENERATOR_SCRIPT = Path("15.py")  # or Path("yt_short_rag_local_llama.py")
+GENERATOR_SCRIPT = Path("text-gen-v13.py")  # or Path("yt_short_rag_local_llama.py")
 OUTPUT_DIR = Path("outputs")
 
 # Your environments / executables
@@ -70,8 +71,17 @@ def read_narration(narration_path: Path) -> str:
 
 
 def read_image_prompts(images_path: Path) -> List[str]:
-    lines = [ln.strip() for ln in images_path.read_text(encoding="utf-8").splitlines()]
-    return [ln for ln in lines if ln]
+    """Parse the Python list from the images prompt file."""
+    text = images_path.read_text(encoding="utf-8")
+    # Find the first '=' and parse the right-hand side as a Python list
+    try:
+        rhs = text.split('=', 1)[1].strip()
+        prompts = ast.literal_eval(rhs)
+        if isinstance(prompts, list):
+            return [str(p).strip() for p in prompts if str(p).strip()]
+    except Exception as e:
+        print(f"Error parsing image prompts from {images_path}: {e}")
+    return []
 
 
 def generate_one_story() -> Tuple[Path, Path]:

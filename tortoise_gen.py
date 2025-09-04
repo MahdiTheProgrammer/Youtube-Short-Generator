@@ -43,7 +43,7 @@ for idx, chunk in enumerate(chunks):
             text=chunk,
             voice_samples=voice_samples,
             conditioning_latents=conditioning_latents,
-            preset="fast",
+            preset="high_quality",
             num_autoregressive_samples=12,
         )
         if audio is not None and audio.shape[-1] > 0:

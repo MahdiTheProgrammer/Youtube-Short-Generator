@@ -50,10 +50,10 @@ image_duration = duration / len(image_files)
 image_clips = []
 for i, image_path in enumerate(image_files):
     img_clip = (ImageClip(image_path)
-                .resize(height=video_size[1] // 3)  # scale to half video height
+                .resize(height=video_size[1] // 2.5)  # scale to half video height
                 .set_start(i * image_duration)
                 .set_duration(image_duration)
-                .set_position(("center", "top"))
+                .set_position(("center", "center"))
                 .crossfadein(0.5)
                 .crossfadeout(0.5))
     image_clips.append(img_clip)

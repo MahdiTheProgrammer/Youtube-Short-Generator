@@ -1,3 +1,5 @@
 vids/
 generations/
 api.txt
+outputs/
+__pycache__/
